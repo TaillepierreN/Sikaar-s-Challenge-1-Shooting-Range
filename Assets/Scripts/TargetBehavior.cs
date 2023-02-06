@@ -24,5 +24,21 @@ public class TargetBehavior : MonoBehaviour
             if (transform.position.x >= distanceRight) destination = -1;
             else if (transform.position.x <= distanceLeft) destination = 1;
         }
+        if (beenHit)
+        {
+            transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, Quaternion.Euler(90, 0, 0), 8f * Time.deltaTime);
+
+        }
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("bullet"))
+        {
+            if (!beenHit)
+            {
+                beenHit = true;
+                Destroy(other.gameObject);
+            }
+        }
     }
 }
