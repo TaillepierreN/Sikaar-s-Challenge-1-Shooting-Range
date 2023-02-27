@@ -8,6 +8,7 @@ public class GunBehavior : MonoBehaviour
     [SerializeField] Animator gunAnim;
     [SerializeField] Transform spawnBulletPoint;
     [SerializeField] GameObject bullet;
+    [SerializeField] AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,7 @@ public class GunBehavior : MonoBehaviour
             fire = true;
             StartCoroutine("resetGun");
             var bulletShot = Instantiate(bullet,spawnBulletPoint.position,Quaternion.identity);
+            audioSource.Play();
             bulletShot.GetComponent<Rigidbody>().AddForce(spawnBulletPoint.forward*20,ForceMode.Impulse);
         }
 
